@@ -48,6 +48,7 @@ class TimezoneAPITests: XCTestCase {
                 XCTAssertEqual(location.zipCode, "90293")
                 XCTAssertEqual(location.city, "Playa Del Rey")
                 XCTAssertEqual(location.state, "CA")
+                XCTAssertEqual(location.timezone.timezoneIdentifier , "America/Los_Angeles")
             } else {
                 XCTFail()
             }

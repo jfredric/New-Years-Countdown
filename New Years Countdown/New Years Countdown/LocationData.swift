@@ -9,9 +9,17 @@
 import Foundation
 
 class LocationData: Decodable {
-    var zipCode:String
-    var city:String
-    var state:String
-//    var timeZone:TimeZone
+    var zipCode: String
+    var city: String
+    var state: String
     
+    class Timezone: Decodable {
+        var timezoneIdentifier: String
+        var timezoneAbbr: String
+        var utcOffsetSec: Int
+        var isDst: String
+        
+    }
+    var timezone:Timezone
 }
+
