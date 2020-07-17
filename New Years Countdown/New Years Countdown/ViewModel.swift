@@ -13,19 +13,20 @@ class ViewModel {
     private var newYears:Date?
     private var timeZoneCalendar:Calendar?
     
-    var days:Int {
-        
+    struct CountDownValues: Equatable {
+        var days:Int = 0
+        var hours: Int = 0
+        var minutes: Int = 0
+        var seconds: Int = 0
+    }
+    
+    var countDown:CountDownValues {
         // check if a timezone has been set and newYears Date value computed
         if let calendar = timeZoneCalendar, let newYears = newYears  {
-            if let days = calendar.daysBetween(start: Date(), end: newYears) {
-                return days
-            } else {
-                print("[ViewModel] Unknown error calculating days difference")
-            }
+            return componentTimeBetween(start: Date(), end: newYears, for: calendar)
+        } else {
+            return CountDownValues()
         }
-        
-        // if any failures
-        return 0
     }
     
     func update(timezoneAbbr: String) {
@@ -45,6 +46,17 @@ class ViewModel {
         }
     }
     
+    // MARK: Helper Functions
+    
+    // Takes two dates and gives you the difference in time seperated out into individual time componetnts
+    func componentTimeBetween(start:Date, end:Date, for calendar: Calendar) -> CountDownValues {
+        
+        let components = calendar.dateComponents([.day,.hour,.minute,.second], from: start, to: end)
+        
+        return CountDownValues(days: components.day ?? 0, hours: components.hour ?? 0, minutes: components.minute ?? 0, seconds: components.second ?? 0)
+    }
+    
+    // Returns the Date value representing new years for the year of the date given.
     func getNewYears(date: Date) -> Date? {
         if let calendar = timeZoneCalendar {
             let dateComponents = timeZoneCalendar!.dateComponents([.year], from: date)
