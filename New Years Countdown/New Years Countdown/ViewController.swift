@@ -10,15 +10,31 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // Outlets
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    
+    // MARK: View LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        TimezoneAPI.shared.getTimezone(zipcode: "90293") { (locationData) in
-            print(locationData)
-        }
     }
 
+    // MARK: Action Functions
+    
+    @IBAction func submitButtonTapped(_ sender: Any) {
+        TimezoneAPI.shared.getTimezone(zipcode: "90293") { [weak self] (locationData) in
+            DispatchQueue.main.async {
+                if let locationData = locationData {
+                    if let locationLabel = self?.locationLabel {
+                        locationLabel.text = locationData.city + ", " + locationData.state
+                    }
+                }
+            }
+        }
+    }
     
 
 
