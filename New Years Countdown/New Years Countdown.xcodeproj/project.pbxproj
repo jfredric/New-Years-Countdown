@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		EF6C3AF924C171F3002A99C9 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3AF824C171F3002A99C9 /* LocationData.swift */; };
 		EF6C3AFA24C171F3002A99C9 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3AF824C171F3002A99C9 /* LocationData.swift */; };
+		EF6C3AFC24C18D73002A99C9 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3AFB24C18D73002A99C9 /* ViewModel.swift */; };
+		EF6C3AFE24C22684002A99C9 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3AFD24C22684002A99C9 /* ViewModelTests.swift */; };
+		EF6C3B0224C229D4002A99C9 /* Calendar+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3B0124C229D4002A99C9 /* Calendar+Math.swift */; };
+		EF6C3B0324C229D4002A99C9 /* Calendar+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3B0124C229D4002A99C9 /* Calendar+Math.swift */; };
+		EF6C3B0524C22AD5002A99C9 /* Calender+MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3B0424C22AD5002A99C9 /* Calender+MathTests.swift */; };
 		EFF8A44524C14346005D5A0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A44424C14346005D5A0E /* AppDelegate.swift */; };
 		EFF8A44724C14346005D5A0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A44624C14346005D5A0E /* SceneDelegate.swift */; };
 		EFF8A44924C14346005D5A0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A44824C14346005D5A0E /* ViewController.swift */; };
@@ -41,6 +46,10 @@
 
 /* Begin PBXFileReference section */
 		EF6C3AF824C171F3002A99C9 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
+		EF6C3AFB24C18D73002A99C9 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		EF6C3AFD24C22684002A99C9 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
+		EF6C3B0124C229D4002A99C9 /* Calendar+Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+Math.swift"; sourceTree = "<group>"; };
+		EF6C3B0424C22AD5002A99C9 /* Calender+MathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calender+MathTests.swift"; sourceTree = "<group>"; };
 		EFF8A44124C14346005D5A0E /* New Years Countdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Years Countdown.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFF8A44424C14346005D5A0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFF8A44624C14346005D5A0E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +125,8 @@
 				EFF8A44F24C14348005D5A0E /* LaunchScreen.storyboard */,
 				EFF8A45224C14348005D5A0E /* Info.plist */,
 				EF6C3AF824C171F3002A99C9 /* LocationData.swift */,
+				EF6C3AFB24C18D73002A99C9 /* ViewModel.swift */,
+				EF6C3B0124C229D4002A99C9 /* Calendar+Math.swift */,
 			);
 			path = "New Years Countdown";
 			sourceTree = "<group>";
@@ -126,6 +137,8 @@
 				EFF8A47824C14E13005D5A0E /* TimezoneAPITests.swift */,
 				EFF8A47D24C15048005D5A0E /* New_Years_CountdownTests.swift */,
 				EFF8A45D24C14348005D5A0E /* Info.plist */,
+				EF6C3AFD24C22684002A99C9 /* ViewModelTests.swift */,
+				EF6C3B0424C22AD5002A99C9 /* Calender+MathTests.swift */,
 			);
 			path = "New Years CountdownTests";
 			sourceTree = "<group>";
@@ -275,6 +288,8 @@
 				EFF8A47624C14401005D5A0E /* TimezoneAPI.swift in Sources */,
 				EFF8A44524C14346005D5A0E /* AppDelegate.swift in Sources */,
 				EFF8A44724C14346005D5A0E /* SceneDelegate.swift in Sources */,
+				EF6C3AFC24C18D73002A99C9 /* ViewModel.swift in Sources */,
+				EF6C3B0224C229D4002A99C9 /* Calendar+Math.swift in Sources */,
 				EF6C3AF924C171F3002A99C9 /* LocationData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,8 +300,11 @@
 			files = (
 				EF6C3AFA24C171F3002A99C9 /* LocationData.swift in Sources */,
 				EFF8A47924C14E13005D5A0E /* TimezoneAPITests.swift in Sources */,
+				EF6C3AFE24C22684002A99C9 /* ViewModelTests.swift in Sources */,
 				EFF8A47E24C15048005D5A0E /* New_Years_CountdownTests.swift in Sources */,
 				EFF8A47A24C14E83005D5A0E /* TimezoneAPI.swift in Sources */,
+				EF6C3B0524C22AD5002A99C9 /* Calender+MathTests.swift in Sources */,
+				EF6C3B0324C229D4002A99C9 /* Calendar+Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
