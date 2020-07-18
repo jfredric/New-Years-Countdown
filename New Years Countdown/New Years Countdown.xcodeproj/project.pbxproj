@@ -11,6 +11,8 @@
 		EF6C3AFA24C171F3002A99C9 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3AF824C171F3002A99C9 /* LocationData.swift */; };
 		EF6C3AFC24C18D73002A99C9 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3AFB24C18D73002A99C9 /* ViewModel.swift */; };
 		EF6C3AFE24C22684002A99C9 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3AFD24C22684002A99C9 /* ViewModelTests.swift */; };
+		EF6C3B0A24C2977D002A99C9 /* CountDownData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3B0924C2977D002A99C9 /* CountDownData.swift */; };
+		EF6C3B0B24C2977D002A99C9 /* CountDownData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3B0924C2977D002A99C9 /* CountDownData.swift */; };
 		EFF8A44524C14346005D5A0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A44424C14346005D5A0E /* AppDelegate.swift */; };
 		EFF8A44724C14346005D5A0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A44624C14346005D5A0E /* SceneDelegate.swift */; };
 		EFF8A44924C14346005D5A0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A44824C14346005D5A0E /* ViewController.swift */; };
@@ -45,6 +47,7 @@
 		EF6C3AF824C171F3002A99C9 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 		EF6C3AFB24C18D73002A99C9 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		EF6C3AFD24C22684002A99C9 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
+		EF6C3B0924C2977D002A99C9 /* CountDownData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownData.swift; sourceTree = "<group>"; };
 		EFF8A44124C14346005D5A0E /* New Years Countdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Years Countdown.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFF8A44424C14346005D5A0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFF8A44624C14346005D5A0E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 				EFF8A44624C14346005D5A0E /* SceneDelegate.swift */,
 				EFF8A47524C14401005D5A0E /* TimezoneAPI.swift */,
 				EF6C3AF824C171F3002A99C9 /* LocationData.swift */,
+				EF6C3B0924C2977D002A99C9 /* CountDownData.swift */,
 				EFF8A44824C14346005D5A0E /* ViewController.swift */,
 				EF6C3AFB24C18D73002A99C9 /* ViewModel.swift */,
 				EFF8A44A24C14346005D5A0E /* Main.storyboard */,
@@ -278,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFF8A44924C14346005D5A0E /* ViewController.swift in Sources */,
+				EF6C3B0A24C2977D002A99C9 /* CountDownData.swift in Sources */,
 				EFF8A47624C14401005D5A0E /* TimezoneAPI.swift in Sources */,
 				EFF8A44524C14346005D5A0E /* AppDelegate.swift in Sources */,
 				EFF8A44724C14346005D5A0E /* SceneDelegate.swift in Sources */,
@@ -291,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF6C3AFA24C171F3002A99C9 /* LocationData.swift in Sources */,
+				EF6C3B0B24C2977D002A99C9 /* CountDownData.swift in Sources */,
 				EFF8A47924C14E13005D5A0E /* TimezoneAPITests.swift in Sources */,
 				EF6C3AFE24C22684002A99C9 /* ViewModelTests.swift in Sources */,
 				EFF8A47E24C15048005D5A0E /* New_Years_CountdownTests.swift in Sources */,

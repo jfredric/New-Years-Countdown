@@ -13,8 +13,6 @@ class ViewModelTests: XCTestCase {
 
     let calendar = Calendar(identifier: .gregorian)
     
-    typealias CountDownValues = ViewModel.CountDownValues
-    
     // Test that time values between two dates for each component are calculated corrected
     func testComponentTimeBetween() throws {
         // Given
@@ -28,9 +26,9 @@ class ViewModelTests: XCTestCase {
         let reversedDays = ViewModel.componentTimeBetween(start: endDate, end: startDate, for: calendar)
             
         // Then
-        XCTAssertEqual(sameDate, CountDownValues())
-        XCTAssertEqual(sevenDays, CountDownValues(days: 6, hours: 23, minutes: 29, seconds: 59))
-        XCTAssertEqual(reversedDays, CountDownValues(days: -6, hours: -23, minutes: -29, seconds: -59))
+        XCTAssertEqual(sameDate, CountDownData())
+        XCTAssertEqual(sevenDays, CountDownData(days: 6, hours: 23, minutes: 29, seconds: 59))
+        XCTAssertEqual(reversedDays, CountDownData(days: -6, hours: -23, minutes: -29, seconds: -59))
     }
     
     // Test that the new years date is correctly returned for a given date.
@@ -64,6 +62,5 @@ class ViewModelTests: XCTestCase {
         XCTAssertFalse(ViewModel.validate(zipcode: nonNumber))
         XCTAssertFalse(ViewModel.validate(zipcode: decimalNumber))
     }
-    
 
 }

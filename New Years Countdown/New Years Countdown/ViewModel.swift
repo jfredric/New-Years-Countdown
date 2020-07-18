@@ -22,19 +22,19 @@ class ViewModel {
     var viewDelegate:CountDownDelegate?
     var location:LocationData?
     
-    struct CountDownValues: Equatable {
-        var days:Int = 0
-        var hours: Int = 0
-        var minutes: Int = 0
-        var seconds: Int = 0
-    }
-    
-    var countDown:CountDownValues {
+    var countDown:CountDownData {
         // check if a timezone has been set and newYears Date value computed
         if let calendar = timeZoneCalendar, let newYears = newYears  {
-            return ViewModel.componentTimeBetween(start: Date(), end: newYears, for: calendar)
+            var countDownValues = ViewModel.componentTimeBetween(start: Date(), end: newYears, for: calendar)
+            
+            // if Observing daylight savings time
+            if location?.timezone.isDst == .True {
+                countDownValues.hours += 1
+            }
+            
+            return countDownValues
         } else {
-            return CountDownValues()
+            return CountDownData() // zero
         }
     }
     
@@ -90,11 +90,11 @@ class ViewModel {
     }
     
     // Takes two dates and gives you the difference in time seperated out into individual time componetnts
-    class func componentTimeBetween(start:Date, end:Date, for calendar: Calendar) -> CountDownValues {
+    class func componentTimeBetween(start:Date, end:Date, for calendar: Calendar) -> CountDownData {
         
         let components = calendar.dateComponents([.day,.hour,.minute,.second], from: start, to: end)
         
-        return CountDownValues(days: components.day ?? 0, hours: components.hour ?? 0, minutes: components.minute ?? 0, seconds: components.second ?? 0)
+        return CountDownData(days: components.day ?? 0, hours: components.hour ?? 0, minutes: components.minute ?? 0, seconds: components.second ?? 0)
     }
     
 }

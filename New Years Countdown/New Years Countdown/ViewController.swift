@@ -30,6 +30,7 @@ class ViewController: UIViewController, CountDownDelegate, UITextFieldDelegate {
         super.viewDidLoad()
         // Instantiate our view model
         viewModel = ViewModel()
+        viewModel.viewDelegate = self
         
         // set up keyboard delegation
         zipcodeTextField.delegate = self
@@ -83,13 +84,15 @@ class ViewController: UIViewController, CountDownDelegate, UITextFieldDelegate {
     func locationDidChange() {
         if let locationData = viewModel.location {
             // Ensure the labels hidden before a timezone if set are now shown, and update the city state label for the new location
-            if let inLabel = self.inLabel {
-                inLabel.isHidden = false
-            }
-            
-            if let locationLabel = self.locationLabel {
-                locationLabel.isHidden = false
-                locationLabel.text = locationData.city + ", " + locationData.state
+            DispatchQueue.main.async {
+                if let inLabel = self.inLabel {
+                    inLabel.isHidden = false
+                }
+                
+                if let locationLabel = self.locationLabel {
+                    locationLabel.isHidden = false
+                    locationLabel.text = locationData.city + ", " + locationData.state
+                }
             }
         }
     }
@@ -114,14 +117,6 @@ class ViewController: UIViewController, CountDownDelegate, UITextFieldDelegate {
 
                 self.present(alert, animated: true)
             }
-                
-        } else { // text is empty
-            // Alert user that they need to input a zipcode
-            let alert = UIAlertController(title: "Missing Zipcode", message: nil, preferredStyle: .alert)
-
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-
-            self.present(alert, animated: true)
         }
     }
 

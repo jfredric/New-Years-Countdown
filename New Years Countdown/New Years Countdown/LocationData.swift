@@ -17,7 +17,13 @@ class LocationData: Decodable {
         var timezoneIdentifier: String
         var timezoneAbbr: String
         var utcOffsetSec: Int
-        var isDst: String
+        var isDst: BoolAsString
+        
+        enum BoolAsString: String, Decodable {
+            case True = "T"
+            case False = "F"
+            case Unknown
+        }
         
     }
     var timezone:Timezone
