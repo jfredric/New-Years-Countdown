@@ -29,20 +29,20 @@ class ViewModel {
         }
     }
     
-    func update(timezoneAbbr: String) {
-        if let timeZone = TimeZone(abbreviation: timezoneAbbr) {
+    func update(timezone timezoneString: String) {
+        if let timezone = TimeZone(identifier: timezoneString){
             // set the calender to the provided timezone
             timeZoneCalendar = Calendar(identifier: .gregorian)
-            timeZoneCalendar!.timeZone = timeZone
+            timeZoneCalendar!.timeZone = timezone
             
             // get the new years date value for the current date/year
             newYears = getNewYears(date: Date())
             if newYears == nil {
-                print("[ViewModel] Failed to get new years Date value for given timezone abbv: ",timezoneAbbr)
+                print("[ViewModel] Failed to get new years Date value for given timezone: ",timezoneString)
             }
             
         } else {
-            print("[ViewModel] Failed to get TimeZone value for timezone abbv: ",timezoneAbbr)
+            print("[ViewModel] Failed to get TimeZone value for timezone: ",timezoneString)
         }
     }
     

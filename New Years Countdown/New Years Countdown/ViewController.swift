@@ -103,7 +103,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             locationLabel.text = locationData.city + ", " + locationData.state
                         }
                         if let viewModel = self?.viewModel {
-                            viewModel.update(timezoneAbbr: locationData.timezone.timezoneAbbr)
+                            viewModel.update(timezone: locationData.timezone.timezoneIdentifier)
                         }
                     }
                 }
