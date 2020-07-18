@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, CountDownDelegate, UITextFieldDelegate {
 
     // MARK: Properties
     
@@ -24,7 +24,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var zipcodeTextField: UITextField!
     
     
-    // MARK: View LifeCycle
+    // MARK: UIViewContoller Lifecycle and setup
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,17 +45,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    // Overide the status bar style to use light text/icons over the dark background.
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    // MARK: TextField Setup and Delegate Functions
+    // Updates the clock labels to the most recent values
+    @objc func updateTime() {
+        daysLabel.text = String(viewModel.countDown.days)
+        hoursLabel.text = String(viewModel.countDown.hours)
+        minutesLabel.text = String(viewModel.countDown.minutes)
+        secondsLabel.text = String(viewModel.countDown.seconds)
+    }
+    
+    // MARK: TextFieldDelegate and Keyboard Setup
     
     func setupKeyboardToolbar() {
-        
         let toolbar = UIToolbar(frame: CGRect(origin: .zero, size: .init(width: view.frame.size.width, height: 35)))
         
-        let updateButton = UIBarButtonItem(title: "Update", style: .done, target: self, action: #selector(updateFromKeyboard))
+        let updateButton = UIBarButtonItem(title: "Update", style: .done, target: self, action: #selector(processZipcodeInput))
         // Addes space so we can push button to the right side
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
@@ -66,60 +74,61 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-
-        updateFromKeyboard()
-
+        processZipcodeInput()
         return true
     }
     
+    // MARK: CountDownDelegate Functions
     
-    // MARK: Hepler Functions
-    
-    // Updates the clock labels to the most resent values
-    @objc func updateTime() {
-        daysLabel.text = String(viewModel.countDown.days)
-        hoursLabel.text = String(viewModel.countDown.hours)
-        minutesLabel.text = String(viewModel.countDown.minutes)
-        secondsLabel.text = String(viewModel.countDown.seconds)
+    func locationDidChange() {
+        if let locationData = viewModel.location {
+            // Ensure the labels hidden before a timezone if set are now shown, and update the city state label for the new location
+            if let inLabel = self.inLabel {
+                inLabel.isHidden = false
+            }
+            
+            if let locationLabel = self.locationLabel {
+                locationLabel.isHidden = false
+                locationLabel.text = locationData.city + ", " + locationData.state
+            }
+        }
     }
     
-    @objc func updateFromKeyboard() {
-        // Dismiss Keyboard
+    
+    // MARK: Helper Functions
+    
+    @objc func processZipcodeInput() {
+        // Dismiss Keyboard in needed
         self.view.endEditing(true)
         
-        updateZipcodeFromTextField()
-    }
-    
-    func updateZipcodeFromTextField() {
+        // Process user input
         if let zipcode = zipcodeTextField.text {
-            
-            // TODO: validate zipcode and alert for input
-            
-            TimezoneAPI.shared.getTimezone(zipcode: zipcode) { [weak self] (locationData) in
-                DispatchQueue.main.async {
-                    if let locationData = locationData {
-                        if let inLabel = self?.inLabel {
-                            inLabel.isHidden = false
-                        }
-                        if let locationLabel = self?.locationLabel {
-                            locationLabel.isHidden = false
-                            locationLabel.text = locationData.city + ", " + locationData.state
-                        }
-                        if let viewModel = self?.viewModel {
-                            viewModel.update(timezone: locationData.timezone.timezoneIdentifier)
-                        }
-                    }
-                }
+            if ViewModel.validate(zipcode: zipcode) {
+                // if zipcode is valid then update location
+                viewModel.updateLocation(withZipcode: zipcode)
+            } else {
+                // Alert user that there is an issue with the zip.
+                let alert = UIAlertController(title: "Invalid Zipcode", message: "Zip codes must be 5 digits long and contain only numbers.", preferredStyle: .alert)
+
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+
+                self.present(alert, animated: true)
             }
-        } else {
-            // TODO: alert invalid input
+                
+        } else { // text is empty
+            // Alert user that they need to input a zipcode
+            let alert = UIAlertController(title: "Missing Zipcode", message: nil, preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
         }
     }
 
-    // MARK: Action Functions
+    // MARK: IBAction Functions
     
     @IBAction func submitButtonTapped(_ sender: Any) {
-        updateZipcodeFromTextField()
+        processZipcodeInput()
     }
     
 

@@ -12,12 +12,8 @@ import XCTest
 class ViewModelTests: XCTestCase {
 
     let calendar = Calendar(identifier: .gregorian)
-    var viewModel:ViewModel!
     
-    override func setUp() {
-        viewModel = ViewModel()
-        viewModel.update(timezoneAbbr: "PDT")
-    }
+    typealias CountDownValues = ViewModel.CountDownValues
     
     // Test that time values between two dates for each component are calculated corrected
     func testComponentTimeBetween() throws {
@@ -27,19 +23,22 @@ class ViewModelTests: XCTestCase {
         let endDate = calendar.date(from: DateComponents(year: 2020, month: 1, day: 8, hour: 0, minute: 0, second: 0))!
             
         // When
-        let sameDate = viewModel.componentTimeBetween(start: today, end: today, for: calendar)
-        let sevenDays = viewModel.componentTimeBetween(start: startDate, end: endDate, for: calendar)
-        let reversedDays = viewModel.componentTimeBetween(start: endDate, end: startDate, for: calendar)
+        let sameDate = ViewModel.componentTimeBetween(start: today, end: today, for: calendar)
+        let sevenDays = ViewModel.componentTimeBetween(start: startDate, end: endDate, for: calendar)
+        let reversedDays = ViewModel.componentTimeBetween(start: endDate, end: startDate, for: calendar)
             
         // Then
-        XCTAssertEqual(sameDate, ViewModel.CountDownValues())
-        XCTAssertEqual(sevenDays, ViewModel.CountDownValues(days: 7, hours: 0, minutes: 30, seconds: 59))
-        XCTAssertEqual(reversedDays, ViewModel.CountDownValues(days: -7, hours: 0, minutes: -30, seconds: -59))
+        XCTAssertEqual(sameDate, CountDownValues())
+        XCTAssertEqual(sevenDays, CountDownValues(days: 6, hours: 23, minutes: 29, seconds: 59))
+        XCTAssertEqual(reversedDays, CountDownValues(days: -6, hours: -23, minutes: -29, seconds: -59))
     }
     
     // Test that the new years date is correctly returned for a given date.
     func testGetNewYears() throws {
         // Given
+        let viewModel = ViewModel()
+        viewModel.updateCountDown(withDate: Date(), timezoneIdentifier: "America/Los_Angeles")
+        
         let newYears = calendar.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 0, minute: 0, second: 0))!
         let newYearsEve = calendar.date(from: DateComponents(year: 2020, month: 12, day: 31, hour: 0, minute: 0, second: 0))!
             
@@ -49,5 +48,22 @@ class ViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(newYearsResult, newYears)
     }
+    
+    func testValidateInput() throws {
+        // Given
+        let valid = "90293"
+        let short = "902"
+        let long = "902930"
+        let nonNumber = "902B3"
+        let decimalNumber = "902.3"
+        
+        // When & Then
+        XCTAssertTrue(ViewModel.validate(zipcode: valid))
+        XCTAssertFalse(ViewModel.validate(zipcode: short))
+        XCTAssertFalse(ViewModel.validate(zipcode: long))
+        XCTAssertFalse(ViewModel.validate(zipcode: nonNumber))
+        XCTAssertFalse(ViewModel.validate(zipcode: decimalNumber))
+    }
+    
 
 }
