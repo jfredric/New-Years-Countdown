@@ -130,11 +130,11 @@
 		EFF8A45A24C14348005D5A0E /* New Years CountdownTests */ = {
 			isa = PBXGroup;
 			children = (
-				EFF8A47824C14E13005D5A0E /* TimezoneAPITests.swift */,
 				EFF8A47D24C15048005D5A0E /* New_Years_CountdownTests.swift */,
-				EFF8A45D24C14348005D5A0E /* Info.plist */,
+				EFF8A47824C14E13005D5A0E /* TimezoneAPITests.swift */,
 				EF6C3AFD24C22684002A99C9 /* ViewModelTests.swift */,
 				EF6C3B0424C22AD5002A99C9 /* Calender+MathTests.swift */,
+				EFF8A45D24C14348005D5A0E /* Info.plist */,
 			);
 			path = "New Years CountdownTests";
 			sourceTree = "<group>";

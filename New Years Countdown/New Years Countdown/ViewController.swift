@@ -43,7 +43,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Start the timer to animate the clock
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
         
-        
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: TextField Setup and Delegate Functions
