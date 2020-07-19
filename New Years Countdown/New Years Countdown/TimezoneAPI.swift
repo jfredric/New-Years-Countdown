@@ -10,6 +10,10 @@ import Foundation
 
 class TimezoneAPI {
     
+    enum APIError : Error {
+        case UnexpecedStatusCode
+    }
+    
     // Properties
     private let baseURL = "http://localhost:5000/api/timezone/"
     private let session = URLSession.shared
@@ -21,7 +25,7 @@ class TimezoneAPI {
         // Add any additional initial confirguration here as needed.
     }
     
-    func getTimezone(zipcode:String,_ result: @escaping (LocationData?) -> Void) {
+    func getTimezone(zipcode:String,_ result: @escaping (LocationData?,Error?) -> Void) {
         
         // Combine baseURL and zip code to create URL
         guard let url = URL(string:baseURL + zipcode) else {
@@ -29,7 +33,7 @@ class TimezoneAPI {
         }
         
         var request = URLRequest(url: url)
-        // Add api key to header
+        // Add api key to request header
         request.setValue("b064b6d2-8fbd-48b0-ac29-1a88237ce022", forHTTPHeaderField: "X-Application-Key")
         
         // make API Request with given URL and URLRequest
@@ -38,7 +42,7 @@ class TimezoneAPI {
             // Log any network errors
             if let error = requestError {
                 print("[TimezoneAPI] Request error: ",error.localizedDescription)
-                result(nil)
+                result(nil,error)
                 return
             }
             
@@ -47,7 +51,7 @@ class TimezoneAPI {
                 if response.statusCode != 200 {
                     // incorrect status code in response
                     print("[TimezoneAPI] Request returned unexpected status code (",response.statusCode,")")
-                    result(nil)
+                    result(nil,APIError.UnexpecedStatusCode)
                     return
                 }
             }
@@ -62,11 +66,11 @@ class TimezoneAPI {
                 
                 do {
                     let locationData = try decoder.decode(LocationData.self, from: data)
-                    result(locationData)
+                    result(locationData,nil)
                 } catch  {
                     // Log any issue decoding to json data
                     print("[TimezoneAPI] Json Decoding failed with:", error)
-                    result(nil)
+                    result(nil,error)
                 }
             }
             
