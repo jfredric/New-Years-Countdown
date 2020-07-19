@@ -8,11 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController, CountDownDelegate, UITextFieldDelegate {
+class ViewController: UIViewController, KeyboardNotifierDelegate, CountDownDelegate, UITextFieldDelegate {
+    
 
     // MARK: Properties
     
     var viewModel:ViewModel!
+    var keyboardNotifier:KeyboardNotifier!
+    var inputBottomConstant: CGFloat!
     
     // Outlets
     @IBOutlet weak var locationLabel: UILabel!
@@ -22,7 +25,9 @@ class ViewController: UIViewController, CountDownDelegate, UITextFieldDelegate {
     @IBOutlet weak var minutesLabel: UILabel!
     @IBOutlet weak var secondsLabel: UILabel!
     @IBOutlet weak var zipcodeTextField: UITextField!
-    
+    @IBOutlet weak var updateButton: UIButton!
+    @IBOutlet weak var inputContainerView: UIView!
+    @IBOutlet weak var inputContainerBottomConstraint: NSLayoutConstraint!
     
     // MARK: UIViewContoller Lifecycle and setup
     
@@ -34,12 +39,15 @@ class ViewController: UIViewController, CountDownDelegate, UITextFieldDelegate {
         
         // set up keyboard delegation
         zipcodeTextField.delegate = self
+        keyboardNotifier = KeyboardNotifier()
+        keyboardNotifier.delegate = self
+        
+        // Save the current bottom constraint value for the inputContainerView
+        inputBottomConstant = inputContainerBottomConstraint.constant
         
         // set up gesture to dismiss keyboard when tapping anywhere
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
-        
-        setupKeyboardToolbar()
         
         // Start the timer to animate the clock
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
@@ -59,20 +67,35 @@ class ViewController: UIViewController, CountDownDelegate, UITextFieldDelegate {
         secondsLabel.text = String(viewModel.countDown.seconds)
     }
     
-    // MARK: TextFieldDelegate and Keyboard Setup
+    // MARK: KeyboardNotifier Delegate
     
-    func setupKeyboardToolbar() {
-        let toolbar = UIToolbar(frame: CGRect(origin: .zero, size: .init(width: view.frame.size.width, height: 35)))
+    func keyboardWillShow(withduration duration: TimeInterval, animationOptions: UIView.AnimationOptions, height: CGFloat) {
         
-        let updateButton = UIBarButtonItem(title: "Update", style: .done, target: self, action: #selector(processZipcodeInput))
-        // Addes space so we can push button to the right side
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        self.inputContainerBottomConstraint.constant = height
+        self.inputContainerView.backgroundColor = UIColor.systemGray2
+        self.updateButton.isHidden = false
         
-        toolbar.setItems([flexibleSpace, updateButton], animated: false)
-        
-        // Adds toolbar to the textfields accessory view
-        zipcodeTextField.inputAccessoryView = toolbar
+        UIView.animate(withDuration: duration,
+           delay: TimeInterval(0),
+           options: animationOptions,
+           animations: { self.view.layoutIfNeeded() },
+           completion: nil)
     }
+    
+    func keyboardWillDismiss(withduration duration: TimeInterval, animationOptions: UIView.AnimationOptions) {
+        
+        self.inputContainerBottomConstraint.constant = self.inputBottomConstant
+        self.inputContainerView.backgroundColor = UIColor.clear
+        self.updateButton.isHidden = true
+        
+        UIView.animate(withDuration: duration,
+        delay: TimeInterval(0),
+        options: animationOptions,
+        animations: { self.view.layoutIfNeeded() },
+        completion: nil)
+    }
+    
+    // MARK: TextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         processZipcodeInput()
@@ -83,8 +106,9 @@ class ViewController: UIViewController, CountDownDelegate, UITextFieldDelegate {
     
     func locationDidChange() {
         if let locationData = viewModel.location {
-            // Ensure the labels hidden before a timezone if set are now shown, and update the city state label for the new location
             DispatchQueue.main.async {
+                
+                // Ensure the labels hidden before a timezone if set are now shown, and update the city state label for the new location
                 if let inLabel = self.inLabel {
                     inLabel.isHidden = false
                 }
@@ -93,15 +117,17 @@ class ViewController: UIViewController, CountDownDelegate, UITextFieldDelegate {
                     locationLabel.isHidden = false
                     locationLabel.text = locationData.city + ", " + locationData.state
                 }
+                
+                // clear the textfield
+                self.zipcodeTextField.text = ""
             }
         }
     }
     
-    
     // MARK: Helper Functions
     
     @objc func processZipcodeInput() {
-        // Dismiss Keyboard in needed
+        // Dismiss Keyboard
         self.view.endEditing(true)
         
         // Process user input
