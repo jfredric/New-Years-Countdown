@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF02E40224C3DAA900901236 /* KeyboardNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3B1024C3BBC8002A99C9 /* KeyboardNotifier.swift */; };
+		EF02E40324C3DAB300901236 /* TimezoneAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A47524C14401005D5A0E /* TimezoneAPI.swift */; };
 		EF6C3AF924C171F3002A99C9 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3AF824C171F3002A99C9 /* LocationData.swift */; };
 		EF6C3AFA24C171F3002A99C9 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3AF824C171F3002A99C9 /* LocationData.swift */; };
 		EF6C3AFC24C18D73002A99C9 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3AFB24C18D73002A99C9 /* ViewModel.swift */; };
@@ -334,11 +336,13 @@
 			files = (
 				EF6C3AFA24C171F3002A99C9 /* LocationData.swift in Sources */,
 				EF6C3B0B24C2977D002A99C9 /* CountDownData.swift in Sources */,
+				EF02E40224C3DAA900901236 /* KeyboardNotifier.swift in Sources */,
 				EFF8A47924C14E13005D5A0E /* TimezoneAPITests.swift in Sources */,
 				EF6C3AFE24C22684002A99C9 /* ViewModelTests.swift in Sources */,
 				EFF8A47E24C15048005D5A0E /* New_Years_CountdownTests.swift in Sources */,
 				EF6C3B1524C3CFC1002A99C9 /* ViewController.swift in Sources */,
 				EF6C3B0C24C38349002A99C9 /* ViewModel.swift in Sources */,
+				EF02E40324C3DAB300901236 /* TimezoneAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

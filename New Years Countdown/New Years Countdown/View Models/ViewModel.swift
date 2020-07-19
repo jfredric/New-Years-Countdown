@@ -17,25 +17,25 @@ class ViewModel {
     // MARK: Properties
     
     private var newYears:Date?
-    private var timeZoneCalendar:Calendar?
+    private var timeZoneCalendar:Calendar
     
     var viewDelegate:CountDownDelegate?
     var location:LocationData?
     
     var countDown:CountDownData {
-        // check if a timezone has been set and newYears Date value computed
-        if let calendar = timeZoneCalendar, let newYears = newYears  {
-            var countDownValues = ViewModel.componentTimeBetween(start: Date(), end: newYears, for: calendar)
-            
-            // if Observing daylight savings time
-            if location?.timezone.isDst == .True {
-                countDownValues.hours += 1
-            }
-            
-            return countDownValues
-        } else {
-            return CountDownData() // zero
+        var countDownValues = ViewModel.componentTimeBetween(start: Date(), end: newYears ?? Date(), for: timeZoneCalendar)
+        
+        // if Observing daylight savings time
+        if timeZoneCalendar.timeZone.isDaylightSavingTime() {
+            countDownValues.hours += 1
         }
+        
+        return countDownValues
+    }
+    
+    init() {
+        timeZoneCalendar = Calendar(identifier: .gregorian)
+        newYears = getNewYears(date: Date())
     }
     
     // MARK: Instance Functions
@@ -57,7 +57,7 @@ class ViewModel {
         if let timezone = TimeZone(identifier: timezone){
             // set the calender to the provided timezone
             timeZoneCalendar = Calendar(identifier: .gregorian)
-            timeZoneCalendar!.timeZone = timezone
+            timeZoneCalendar.timeZone = timezone
             
             // get the new years date value for the current date/year
             newYears = getNewYears(date: date)
@@ -72,11 +72,9 @@ class ViewModel {
     
     // Returns the Date value representing new years for the year of the date given.
     func getNewYears(date: Date) -> Date? {
-        if let calendar = timeZoneCalendar {
-            let dateComponents = timeZoneCalendar!.dateComponents([.year], from: date)
-            if let year = dateComponents.year {
-                return calendar.date(from: DateComponents(year: year + 1, month: 1, day: 1, hour: 0, minute: 0, second: 0))
-            }
+        let dateComponents = timeZoneCalendar.dateComponents([.year], from: date)
+        if let year = dateComponents.year {
+            return timeZoneCalendar.date(from: DateComponents(year: year + 1, month: 1, day: 1, hour: 0, minute: 0, second: 0))
         }
         
         return nil

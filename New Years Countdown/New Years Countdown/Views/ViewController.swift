@@ -19,7 +19,6 @@ class ViewController: UIViewController, KeyboardNotifierDelegate, CountDownDeleg
     
     // Outlets
     @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var inLabel: UILabel!
     @IBOutlet weak var daysLabel: UILabel!
     @IBOutlet weak var hoursLabel: UILabel!
     @IBOutlet weak var minutesLabel: UILabel!
@@ -36,6 +35,11 @@ class ViewController: UIViewController, KeyboardNotifierDelegate, CountDownDeleg
         // Instantiate our view model
         viewModel = ViewModel()
         viewModel.viewDelegate = self
+        
+        // Set the initial label for location to include the time zone abbreviation
+        if let timeZoneAbbr = Calendar(identifier: .gregorian).timeZone.abbreviation() {
+            locationLabel.text = "Current Timezone (" + timeZoneAbbr + ")"
+        }
         
         // set up keyboard delegation
         zipcodeTextField.delegate = self
@@ -108,13 +112,8 @@ class ViewController: UIViewController, KeyboardNotifierDelegate, CountDownDeleg
         if let locationData = viewModel.location {
             DispatchQueue.main.async {
                 
-                // Ensure the labels hidden before a timezone if set are now shown, and update the city state label for the new location
-                if let inLabel = self.inLabel {
-                    inLabel.isHidden = false
-                }
-                
+                // update the location label for the new city state
                 if let locationLabel = self.locationLabel {
-                    locationLabel.isHidden = false
                     locationLabel.text = locationData.city + ", " + locationData.state
                 }
                 
