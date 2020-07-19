@@ -163,8 +163,8 @@
                                     <constraint firstItem="b4m-G0-7Uf" firstAttribute="centerY" secondItem="Pwe-0V-Lms" secondAttribute="centerY" id="yGp-9D-rCR"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show the count down for any zip code!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5u-e6-SAO" userLabel="promptLabel">
-                                <rect key="frame" x="58.666666666666657" y="641.66666666666663" width="297" height="20.333333333333371"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show the countdown for any zip code!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5u-e6-SAO" userLabel="promptLabel">
+                                <rect key="frame" x="60.666666666666657" y="641.66666666666663" width="292.66666666666674" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
