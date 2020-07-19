@@ -15,6 +15,7 @@
 		EF6C3B0B24C2977D002A99C9 /* CountDownData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3B0924C2977D002A99C9 /* CountDownData.swift */; };
 		EF6C3B0C24C38349002A99C9 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3AFB24C18D73002A99C9 /* ViewModel.swift */; };
 		EF6C3B1124C3BBC8002A99C9 /* KeyboardNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C3B1024C3BBC8002A99C9 /* KeyboardNotifier.swift */; };
+		EF6C3B1524C3CFC1002A99C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A44824C14346005D5A0E /* ViewController.swift */; };
 		EFF8A44524C14346005D5A0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A44424C14346005D5A0E /* AppDelegate.swift */; };
 		EFF8A44724C14346005D5A0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A44624C14346005D5A0E /* SceneDelegate.swift */; };
 		EFF8A44924C14346005D5A0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A44824C14346005D5A0E /* ViewController.swift */; };
@@ -23,7 +24,6 @@
 		EFF8A45124C14348005D5A0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFF8A44F24C14348005D5A0E /* LaunchScreen.storyboard */; };
 		EFF8A47624C14401005D5A0E /* TimezoneAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A47524C14401005D5A0E /* TimezoneAPI.swift */; };
 		EFF8A47924C14E13005D5A0E /* TimezoneAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A47824C14E13005D5A0E /* TimezoneAPITests.swift */; };
-		EFF8A47A24C14E83005D5A0E /* TimezoneAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A47524C14401005D5A0E /* TimezoneAPI.swift */; };
 		EFF8A47C24C1501D005D5A0E /* New_Years_CountdownUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A47B24C1501D005D5A0E /* New_Years_CountdownUITests.swift */; };
 		EFF8A47E24C15048005D5A0E /* New_Years_CountdownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF8A47D24C15048005D5A0E /* New_Years_CountdownTests.swift */; };
 /* End PBXBuildFile section */
@@ -94,6 +94,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF6C3B1224C3CF70002A99C9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EFF8A44824C14346005D5A0E /* ViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EF6C3B1324C3CF8E002A99C9 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF6C3B0924C2977D002A99C9 /* CountDownData.swift */,
+				EF6C3AF824C171F3002A99C9 /* LocationData.swift */,
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
+		EF6C3B1424C3CFB0002A99C9 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF6C3AFB24C18D73002A99C9 /* ViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		EF6C3B1624C3CFE5002A99C9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EF6C3B1024C3BBC8002A99C9 /* KeyboardNotifier.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		EFF8A43824C14346005D5A0E = {
 			isa = PBXGroup;
 			children = (
@@ -120,15 +153,14 @@
 				EFF8A44424C14346005D5A0E /* AppDelegate.swift */,
 				EFF8A44624C14346005D5A0E /* SceneDelegate.swift */,
 				EFF8A47524C14401005D5A0E /* TimezoneAPI.swift */,
-				EF6C3AF824C171F3002A99C9 /* LocationData.swift */,
-				EF6C3B0924C2977D002A99C9 /* CountDownData.swift */,
-				EF6C3AFB24C18D73002A99C9 /* ViewModel.swift */,
-				EFF8A44824C14346005D5A0E /* ViewController.swift */,
+				EF6C3B1324C3CF8E002A99C9 /* Data Models */,
+				EF6C3B1224C3CF70002A99C9 /* Views */,
+				EF6C3B1424C3CFB0002A99C9 /* View Models */,
+				EF6C3B1624C3CFE5002A99C9 /* Utilities */,
 				EFF8A44A24C14346005D5A0E /* Main.storyboard */,
 				EFF8A44D24C14348005D5A0E /* Assets.xcassets */,
 				EFF8A44F24C14348005D5A0E /* LaunchScreen.storyboard */,
 				EFF8A45224C14348005D5A0E /* Info.plist */,
-				EF6C3B1024C3BBC8002A99C9 /* KeyboardNotifier.swift */,
 			);
 			path = "New Years Countdown";
 			sourceTree = "<group>";
@@ -305,7 +337,7 @@
 				EFF8A47924C14E13005D5A0E /* TimezoneAPITests.swift in Sources */,
 				EF6C3AFE24C22684002A99C9 /* ViewModelTests.swift in Sources */,
 				EFF8A47E24C15048005D5A0E /* New_Years_CountdownTests.swift in Sources */,
-				EFF8A47A24C14E83005D5A0E /* TimezoneAPI.swift in Sources */,
+				EF6C3B1524C3CFC1002A99C9 /* ViewController.swift in Sources */,
 				EF6C3B0C24C38349002A99C9 /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
