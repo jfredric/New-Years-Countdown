@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, KeyboardNotifierDelegate, CountDownDelegate, UITextFieldDelegate {
     
+    
 
     // MARK: Properties
     
@@ -54,7 +55,7 @@ class ViewController: UIViewController, KeyboardNotifierDelegate, CountDownDeleg
         view.addGestureRecognizer(tap)
         
         // Start the timer to animate the clock
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         
     }
     
@@ -76,7 +77,7 @@ class ViewController: UIViewController, KeyboardNotifierDelegate, CountDownDeleg
     func keyboardWillShow(withduration duration: TimeInterval, animationOptions: UIView.AnimationOptions, height: CGFloat) {
         
         self.inputContainerBottomConstraint.constant = height
-        self.inputContainerView.backgroundColor = UIColor.systemGray2
+        self.inputContainerView.backgroundColor = UIColor.lightGray
         self.updateButton.isHidden = false
         
         UIView.animate(withDuration: duration,
@@ -107,6 +108,17 @@ class ViewController: UIViewController, KeyboardNotifierDelegate, CountDownDeleg
     }
     
     // MARK: CountDownDelegate Functions
+    
+    func networkErrorOccured(error: Error) {
+        DispatchQueue.main.async {
+            // Alert user that there was an issue connecting to the server.
+            let alert = UIAlertController(title: "Network Issue", message: "Could not connect to server. Check network connection.", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
+        }
+    }
     
     func locationDidChange() {
         if let locationData = viewModel.location {

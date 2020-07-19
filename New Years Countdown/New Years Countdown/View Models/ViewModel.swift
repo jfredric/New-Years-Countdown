@@ -10,6 +10,7 @@ import Foundation
 
 protocol CountDownDelegate {
     func locationDidChange()
+    func networkErrorOccured(error:Error)
 }
 
 class ViewModel {
@@ -41,7 +42,11 @@ class ViewModel {
     // MARK: Instance Functions
     
     func updateLocation(withZipcode zipcode: String) {
-        TimezoneAPI.shared.getTimezone(zipcode: zipcode) { [weak self] (locationData) in
+        TimezoneAPI.shared.getTimezone(zipcode: zipcode) { [weak self] (locationData,error) in
+            if let error = error {
+                self?.viewDelegate?.networkErrorOccured(error: error)
+            }
+            
             if let locationData = locationData {
                 // Save the new location information
                 self?.location = locationData
